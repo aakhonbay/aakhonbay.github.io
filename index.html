@@ -3,15 +3,15 @@
 <tr>
     <td style="padding:8px;border-right: 4px solid red;border-top: 4px solid blue;border-bottom: 4px solid blue;border-radius: 10px;">
         <fieldset>
-                <legend>Style nav bar</legend>
-        <strong>Page 1</strong><br/><br/>
+        <legend>Page 1</legend>
+        <br/>
         <form name="myForm" action="">
             Number Of Rows: <input type="number" name="numberOfRows" value="2">
             Number Of Columns: <input type="number" name="numberOfColumns" value="3">
             <br/>
         </form>
         
-        <!-- background-color/ font size/ font color/ font family -->
+        <!-- background color/ font size/ font color/ font family -->
         <div>
         <br/> Background Color: <input type="color" name="" id="backGround" value="#ffffff">
         <br/> Font Size: <input type="number" name="" id="fontSize" min="6" max="18" value="12">
@@ -25,16 +25,16 @@
             <option name="fontFamily" id="" value="times new roman"> Times New Roman
             <option name="fontFamily" id="" value="arial"> Arial
         </select>
-        <br/> Direction Of Text: <input type="radio" name="direction" id="direction" value="leftToRight" checked> Left-to-right<br>
-        <input type="radio" name="direction" id="direction" value="rightToLet"> Right-to-left<br> 
+        <br/> Direction Of Text: <input type="radio" name="direction" id="direction" value="ltr" checked> Left-to-right<br>
+        <input type="radio" name="direction" id="direction" value="rtl"> Right-to-left<br> 
         <br/>
-        </fieldset>
         </div>
         <button onclick="buildTable()">Build a table</button>
+        </fieldset>
         <div id="outCome1"></div>
         <button onclick="makePage()">Make a page</button>
         
-        <div id="page1" style="border:1px solid red;border-radius: 4px;padding:7px">
+        <!-- <div id="page1" style="border:1px solid red;border-radius: 4px;padding:7px">
             Content of page 1
         </div>
         
@@ -42,167 +42,102 @@
         <div id="page2" style="display:none; border:1px solid black;border-radius: 4px;padding:7px">
             Content of page 2<br/>
             <a href="#" onclick="return show('page1','page2');">Go back!</a>
-        </div>
+        </div> -->
         
-        <script>
-            /* first step gather user input */
-            var numberOfRows;
-            var numberOfColumns;
-            var outCome1 = document.getElementById('outCome1');
-            var page1 = document.getElementById('page1');
-            var page2 = document.getElementById('page2');
-            var rowLabel = "Row ";
-            var page1Switch = document.createElement("a");
-            var page1SwitchText = "Show Arabic Page"
-                page1Switch.setAttribute("onclick","return show('page2','page1');");
-                page1Switch.href= "#";
-                page1Switch.appendChild(document.createTextNode(page1SwitchText));
-            /* generating a form to build the table */
-            /* outCome1 */
-            function buildTable(){
-                numberOfRows = Number(document.forms["myForm"].elements[0].value);
-                numberOfColumns = Number(document.forms["myForm"].elements[1].value);
-               /* clears table */
-                while(page1.firstChild){
-                    page1.removeChild(page1.firstChild);
-                }
-                /* clears input form */
-                while(outCome1.firstChild){
-                    outCome1.removeChild(outCome1.firstChild);
-                }
-                
-        
-                for(let i=0; i<numberOfRows; i++){
-                    console.log("BUILDING ROW " + (i+1));
-                    let tempLable = rowLabel + (i+1);
-                    let lable = outCome1.appendChild(document.createTextNode(tempLable));
-                    let form = document.createElement("form");
-                    form.name = "row" + i;
-        
-                    for(let y=0; y<numberOfColumns; y++){  
-                        
-                        let input = document.createElement("input");
-                        input.id = "columen"+y;
-                        input.type = "text";
-                        input.value = "row "+(i+1)+ ", input "+(y+1);
-                        let columenLable = "Columen " +(y+1)+": ";
-                        lable = form.appendChild(document.createTextNode(columenLable));
-                        form.appendChild(input);        
-                        outCome1.appendChild(form);
-                    }       
-                }        
-            }
-            /* page1 building a table from a form(outCome1) */
-            function makePage(){
+<!-- <script></script> -->
 
-                /* style nav bar */
-                var table = document.createElement("table");
-                var fontFamily;
-                var backGround;
-                var fontColor;
-                var fontSize;
-                var direction;
-                    fontFamily = document.getElementById("fontFamily").value;
-                    backGround = document.getElementById("backGround").value
-                    fontColor = document.getElementById("fontColor").value;
-                    fontSize = document.getElementById("fontSize").value;
-                    direction = document.getElementById("direction").value;
-                    table.style.fontFamily = fontFamily;
-                    table.style.backgroundColor = backGround;
-                    table.style.font = fontColor;
-                    table.style.fontSize = fontSize;
-                    table.style.direction = direction;
-                /*  */
-                numberOfRows = Number(document.forms["myForm"].elements[0].value);
-                numberOfColumns = Number(document.forms["myForm"].elements[1].value);
-                /* allows you to make edits by clearing an rebuilding */
-                while(page1.firstChild){
-                    page1.removeChild(page1.firstChild);
-                }
-                var content = [];
-                var rowId = "row";
-                /* building var content[a table [a row],[a row]...] */
-                for(let i=0; i<numberOfRows; i++){
-                    content.push([]); // making number of rows with each "[a row]" push
-                    for(let y=0; y<numberOfColumns; y++){
-                        let tempRowId = rowId;
-                        tempRowId = rowId+i; // key to allow grabbing content for the right row
-                        content[i].push(document.forms[tempRowId].elements[y].value);
-                    }
-                }
-                /* building and populating a table from content */
-                for(let i=0; i<numberOfRows; i++){
-                    // rows
-                    table.appendChild(document.createElement("tr"));        
-                    for(let y=0; y<numberOfColumns; y++){
-                        // columens
-                        table.children[i].appendChild(document.createElement("td")).appendChild(document.createTextNode(content[i][y]));
-                    }
-                }          
-            document.getElementById("page1").appendChild(table);
-            document.getElementById("page1").appendChild(document.createElement("br"));
-            document.getElementById("page1").appendChild(page1Switch);
-            
-            
-            }
-            /* JS to display two sets of contents in the same page */
-            function show(shown, hidden) {
-                document.getElementById(shown).style.display='block';
-                document.getElementById(hidden).style.display='none';
-                return false;
-            }
-        </script>
     
     
     
     </td>
     <td style="padding:8px;border-left: 4px solid; border-top: 4px solid;border-bottom: 4px solid;border-radius: 10px;">
-        <strong>Page 2</strong><br/><br/>
+        <fieldset>
+        <legend>Page 2</legend>
+        <br/><br/>
         <form name="page2Form1" action=""> <!-- myForm -->
             Number Of Rows: <input type="number" name="numberOfRows" value="2">
             Number Of Columns: <input type="number" name="numberOfColumns" value="3">
             <br/>
         </form>
 
+                <!-- background-color/ font size/ font color/ font family/ text direction -->
+                <div>
+                        <br/> Background Color: <input type="color" name="" id="backGroundPage2" value="#ffffff">
+                        <br/> Font Size: <input type="number" name="" id="fontSizePage2" min="6" max="18" value="12">
+                        <br/> Font Color: <input type="color" name="" id="fontColorPage2" value="#000000">
+                        <br/> Font Family:
+                        <select name="fontFamily" id="fontFamilyPage2">
+                            <option name="fontFamily" id="" value="impact"> impact
+                            <option name="fontFamily" id="" value="charcoal"> Charcoal
+                            <option name="fontFamily" id="" value="sans-serif"> Sans Serif
+                            <option name="fontFamily" id="" value="verdana"> Verdana
+                            <option name="fontFamily" id="" value="times new roman"> Times New Roman
+                            <option name="fontFamily" id="" value="arial"> Arial
+                        </select>
+                        <br/> Direction Of Text: <input type="radio" name="direction" id="directionPage2" value="leftToRight" checked> Left-to-right<br>
+                        <input type="radio" name="direction" id="direction" value="rightToLet"> Right-to-left<br> 
+                        <br/>
+                        
+                        </div>
+
         <button onclick="buildPage2Table()">Build a table</button> <!-- buildTable -->
+        </fieldset>
         <div id="page2Form2"></div> <!-- outCome1 -->
         <button onclick="makePage2()">Make page 2</button> <!-- makePage -->
 
-        <script>
-        /* page 2 */
+        <!-- <script></script> -->
+ 
+    </td>
+</tr>
+</table>
+
+<table>
+    <div id="page1" style="border:1px solid red;border-radius: 4px;padding:7px">
+        Content of page 1
+        <a href="#" onclick="return show('page2','page1');">Go forward!</a>
+    </div>
+        
+        
+    <div id="page2" style="display:none; border:1px solid black;border-radius: 4px;padding:7px">
+        Content of page 2<br/>
+        <a href="#" onclick="return show('page1','page2');">Go back!</a>
+    </div>
+</table>
+
+<script>
         /* first step gather user input */
         var numberOfRows;
         var numberOfColumns;
-        var page2Form2 = document.getElementById('page2Form2'); // outCome1
+        var outCome1 = document.getElementById('outCome1');
         var page1 = document.getElementById('page1');
         var page2 = document.getElementById('page2');
         var rowLabel = "Row ";
-        var page2Switch = document.createElement("a"); // page1Switch
-        var page2SwitchLabel = "Show English Page"
-            page2Switch.setAttribute("onclick","return show('page1','page2');");
-            page2Switch.href= "#";
-            page2Switch.appendChild(document.createTextNode(page2SwitchLabel));
-        /* generating a form to build the table from page2Form2 */
-        /* page2Form2 */ //outCome1
-        function buildPage2Table(){ // buildTable
-            numberOfRows = Number(document.forms["page2Form1"].elements[0].value); // myForm
-            numberOfColumns = Number(document.forms["page2Form1"].elements[1].value); // myForm
+        var page1Switch = document.createElement("a");
+        var page1SwitchText = "Show Arabic Page"
+            page1Switch.setAttribute("onclick","return show('page2','page1');");
+            page1Switch.href= "#";
+            page1Switch.appendChild(document.createTextNode(page1SwitchText));
+        /* generating a form to build the table */
+        /* outCome1 */
+        function buildTable(){
+            numberOfRows = Number(document.forms["myForm"].elements[0].value);
+            numberOfColumns = Number(document.forms["myForm"].elements[1].value);
            /* clears table */
-            while(page2.firstChild){ // page1
-                page2.removeChild(page2.firstChild); // page1
+            while(page1.firstChild){
+                page1.removeChild(page1.firstChild);
             }
             /* clears input form */
-            while(page2Form2.firstChild){ // outCome1
-                page2Form2.removeChild(page2Form2.firstChild); // outCome1
+            while(outCome1.firstChild){
+                outCome1.removeChild(outCome1.firstChild);
             }
             
     
             for(let i=0; i<numberOfRows; i++){
                 console.log("BUILDING ROW " + (i+1));
                 let tempLable = rowLabel + (i+1);
-                let lable = page2Form2.appendChild(document.createTextNode(tempLable));
+                let lable = outCome1.appendChild(document.createTextNode(tempLable));
                 let form = document.createElement("form");
-                form.name = "page2Row" + i;  // "row"
+                form.name = "row" + i;
     
                 for(let y=0; y<numberOfColumns; y++){  
                     
@@ -213,56 +148,182 @@
                     let columenLable = "Columen " +(y+1)+": ";
                     lable = form.appendChild(document.createTextNode(columenLable));
                     form.appendChild(input);        
-                    page2Form2.appendChild(form);
+                    outCome1.appendChild(form);
                 }       
             }        
         }
-        /* page2 building a table from a form(page2Form2) */ // page1, outCome1
-        function makePage2(){ // makePage
-            numberOfRows = Number(document.forms["page2Form1"].elements[0].value);
-            numberOfColumns = Number(document.forms["page2Form1"].elements[1].value);
+        /* page1 building a table from a form(outCome1) */
+/*>>>>>*/   function makePage(){
+
+            /* style nav bar */
+            var table = document.createElement("table");
+            var fontFamily;
+            var backGround;
+            var fontColor;
+            var fontSize;
+            var direction;
+                fontFamily = document.getElementById("fontFamily").value;
+                backGround = document.getElementById("backGround").value
+                fontColor = document.getElementById("fontColor").value;
+                console.log("fontColor"+fontColor);
+                fontSize = document.getElementById("fontSize").value;
+                direction = document.getElementById("direction").value;
+                table.style.fontFamily = fontFamily;
+                table.style.backgroundColor = backGround;
+                table.style.color = fontColor;
+                table.style.fontSize = fontSize;
+                table.style.direction = direction;
+            /*  */
+            numberOfRows = Number(document.forms["myForm"].elements[0].value);
+            numberOfColumns = Number(document.forms["myForm"].elements[1].value);
             /* allows you to make edits by clearing an rebuilding */
-            while(page2.firstChild){ // page1
-                page2.removeChild(page2.firstChild); // page1
+            while(page1.firstChild){
+                page1.removeChild(page1.firstChild);
             }
-            var tablePage2 = document.createElement("tablePage2"); // tablePage2
-            var contentPage2 = []; // content
-            var rowId = "page2Row"; // "row"
-            /* building var contentPage2[a table [a row],[a row]...] */ // content
+            var content = [];
+            var rowId = "row";
+            /* building var content[a table [a row],[a row]...] */
             for(let i=0; i<numberOfRows; i++){
-                contentPage2.push([]); // making number of rows with each "[a row]" push // content
+                content.push([]); // making number of rows with each "[a row]" push
                 for(let y=0; y<numberOfColumns; y++){
                     let tempRowId = rowId;
                     tempRowId = rowId+i; // key to allow grabbing content for the right row
-                    contentPage2[i].push(document.forms[tempRowId].elements[y].value);
+                    content[i].push(document.forms[tempRowId].elements[y].value);
                 }
             }
-            console.log("Page 2 Form: "+ document.getElementById("page2Form2"));
-            console.log("Page 2: "+contentPage2[0]);
-            console.log("Page 2: "+contentPage2[1]);
             /* building and populating a table from content */
             for(let i=0; i<numberOfRows; i++){
                 // rows
-                tablePage2.appendChild(document.createElement("tr"));        
+                table.appendChild(document.createElement("tr"));        
                 for(let y=0; y<numberOfColumns; y++){
                     // columens
-                    tablePage2.children[i].appendChild(document.createElement("td")).appendChild(document.createTextNode(contentPage2[i][y]));
+                    table.children[i].appendChild(document.createElement("td")).appendChild(document.createTextNode(content[i][y]));
                 }
             }          
-        document.getElementById("page2").appendChild(tablePage2);
-        document.getElementById("page2").appendChild(document.createElement("br"));
-        document.getElementById("page2").appendChild(page2Switch);
+        document.getElementById("page1").appendChild(table);
+        document.getElementById("page1").appendChild(document.createElement("br"));
+        document.getElementById("page1").appendChild(page1Switch);
         
         
         }
         /* JS to display two sets of contents in the same page */
-        // function show(shown, hidden) {
-        //     document.getElementById(shown).style.display='block';
-        //     document.getElementById(hidden).style.display='none';
-        //     return false;
-        // }
-        </script>
-    </td>
-</tr>
-</table>
+        function show(shown, hidden) {
+            document.getElementById(shown).style.display='block';
+            document.getElementById(hidden).style.display='none';
+            return false;
+        }
+</script>
+<script>
+/* page 2 */
+/* first step gather user input */
+var numberOfRows;
+var numberOfColumns;
+var page2Form2 = document.getElementById('page2Form2'); // outCome1
+var page1 = document.getElementById('page1');
+var page2 = document.getElementById('page2');
+var rowLabel = "Row ";
+var page2Switch = document.createElement("a"); // page1Switch
+var page2SwitchLabel = "Show English Page"
+    page2Switch.setAttribute("onclick","return show('page1','page2');");
+    page2Switch.href= "#";
+    page2Switch.appendChild(document.createTextNode(page2SwitchLabel));
+/* generating a form to build the table from page2Form2 */
+/* page2Form2 */ //outCome1
+function buildPage2Table(){ // buildTable
+    numberOfRows = Number(document.forms["page2Form1"].elements[0].value); // myForm
+    numberOfColumns = Number(document.forms["page2Form1"].elements[1].value); // myForm
+   /* clears table */
+    while(page2.firstChild){ // page1
+        page2.removeChild(page2.firstChild); // page1
+    }
+    /* clears input form */
+    while(page2Form2.firstChild){ // outCome1
+        page2Form2.removeChild(page2Form2.firstChild); // outCome1
+    }
+    
+
+    for(let i=0; i<numberOfRows; i++){
+        console.log("BUILDING ROW " + (i+1));
+        let tempLable = rowLabel + (i+1);
+        let lable = page2Form2.appendChild(document.createTextNode(tempLable));
+        let form = document.createElement("form");
+        form.name = "page2Row" + i;  // "row"
+
+        for(let y=0; y<numberOfColumns; y++){  
+            
+            let input = document.createElement("input");
+            input.id = "columen"+y;
+            input.type = "text";
+            input.value = "row "+(i+1)+ ", input "+(y+1);
+            let columenLable = "Columen " +(y+1)+": ";
+            lable = form.appendChild(document.createTextNode(columenLable));
+            form.appendChild(input);        
+            page2Form2.appendChild(form);
+        }       
+    }        
+}
+/* page2 building a table from a form(page2Form2) */ // page1, outCome1
+/*>>>>>*/   function makePage2(){ // makePage
+        /* style nav bar */
+        var tablePage2 = document.createElement("table"); 
+        var fontFamily;
+        var backGround;
+        var fontColor;
+        var fontSize;
+        var direction;
+            fontFamily = document.getElementById("fontFamilyPage2").value;
+            backGround = document.getElementById("backGroundPage2").value
+            fontColor = document.getElementById("fontColorPage2").value;
+            fontSize = document.getElementById("fontSizePage2").value;
+            direction = document.getElementById("directionPage2").value;
+            tablePage2.style.fontFamily = fontFamily;
+            tablePage2.style.backgroundColor = backGround;
+            tablePage2.style.color = fontColor;
+            console.log("font color page 2: "+tablePage2.style.font);                    
+            tablePage2.style.fontSize = fontSize;
+            tablePage2.style.direction = direction;
+        /*  */
+    numberOfRows = Number(document.forms["page2Form1"].elements[0].value);
+    numberOfColumns = Number(document.forms["page2Form1"].elements[1].value);
+    /* allows you to make edits by clearing an rebuilding */
+    while(page2.firstChild){ // page1
+        page2.removeChild(page2.firstChild); // page1
+    }
+    // tablePage2 = document.createElement("tablePage2"); 
+    var contentPage2 = []; // content
+    var rowId = "page2Row"; // "row"
+    /* building var contentPage2[a table [a row],[a row]...] */ // content
+    for(let i=0; i<numberOfRows; i++){
+        contentPage2.push([]); // making number of rows with each "[a row]" push // content
+        for(let y=0; y<numberOfColumns; y++){
+            let tempRowId = rowId;
+            tempRowId = rowId+i; // key to allow grabbing content for the right row
+            contentPage2[i].push(document.forms[tempRowId].elements[y].value);
+        }
+    }
+    console.log("Page 2 Form: "+ document.getElementById("page2Form2"));
+    console.log("Page 2: "+contentPage2[0]);
+    console.log("Page 2: "+contentPage2[1]);
+    /* building and populating a table from content */
+    for(let i=0; i<numberOfRows; i++){
+        // rows
+        tablePage2.appendChild(document.createElement("tr"));        
+        for(let y=0; y<numberOfColumns; y++){
+            // columens
+            tablePage2.children[i].appendChild(document.createElement("td")).appendChild(document.createTextNode(contentPage2[i][y]));
+        }
+    }          
+document.getElementById("page2").appendChild(tablePage2);
+document.getElementById("page2").appendChild(document.createElement("br"));
+document.getElementById("page2").appendChild(page2Switch);
+
+
+}
+/* JS to display two sets of contents in the same page */
+// function show(shown, hidden) {
+//     document.getElementById(shown).style.display='block';
+//     document.getElementById(hidden).style.display='none';
+//     return false;
+// }
+</script>
 
