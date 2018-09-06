@@ -2,13 +2,33 @@
 <table >
 <tr>
     <td style="padding:8px;border-right: 4px solid red;border-top: 4px solid blue;border-bottom: 4px solid blue;border-radius: 10px;">
+        <fieldset>
+                <legend>Style nav bar</legend>
         <strong>Page 1</strong><br/><br/>
         <form name="myForm" action="">
             Number Of Rows: <input type="number" name="numberOfRows" value="2">
             Number Of Columns: <input type="number" name="numberOfColumns" value="3">
             <br/>
         </form>
-    
+        
+        <!-- background-color/ font size/ font color/ font family -->
+        <div>
+        <br/> Background Color: <input type="color" name="" id="backGround" value="#ffffff">
+        <br/> Font Size: <input type="number" name="" id="fontSize" min="6" max="18" value="12">
+        <br/> Font Color: <input type="color" name="" id="fontColor" value="#000000">
+        <br/> Font Family:
+        <select name="fontFamily" id="fontFamily">
+            <option name="fontFamily" id="" value="Font 1"> Font 1
+            <option name="fontFamily" id="" value="Font 2"> Font 2
+            <option name="fontFamily" id="" value="Font 3"> Font 3
+            <option name="fontFamily" id="" value="Font 4"> Font 4
+            <option name="fontFamily" id="" value="Font 5"> Font 5
+        </select>
+        <br/> Direction Of Text: <input type="radio" name="direction" id="direction" value="leftToRight" checked> Left-to-right<br>
+        <input type="radio" name="direction" id="direction" value="rightToLet"> Right-to-left<br> 
+        <br/>
+        </fieldset>
+        </div>
         <button onclick="buildTable()">Build a table</button>
         <div id="outCome1"></div>
         <button onclick="makePage()">Make a page</button>
@@ -20,10 +40,10 @@
         
         <div id="page2" style="display:none; border:1px solid black;border-radius: 4px;padding:7px">
             Content of page 2<br/>
-            <!-- <a href="#" onclick="return show('page1','page2');">Show English Page</a> -->
+            <a href="#" onclick="return show('page1','page2');">Go back!</a>
         </div>
         
-        <script>        
+        <script>
             /* first step gather user input */
             var numberOfRows;
             var numberOfColumns;
@@ -73,13 +93,31 @@
             }
             /* page1 building a table from a form(outCome1) */
             function makePage(){
+
+                /* style nav bar */
+                var table = document.createElement("table");
+                var fontFamily;
+                var backGround;
+                var fontColor;
+                var fontSize;
+                var direction;
+                    fontFamily = document.getElementById("fontFamily").value;
+                    backGround = document.getElementById("backGround").value
+                    fontColor = document.getElementById("fontColor").value;
+                    fontSize = document.getElementById("fontSize").value;
+                    direction = document.getElementById("direction").value;
+                    table.style.fontFamily = fontFamily;
+                    table.style.backgroundColor = backGround;
+                    table.style.font = fontColor;
+                    table.style.fontSize = fontSize;
+                    table.style.direction = direction;
+                /*  */
                 numberOfRows = Number(document.forms["myForm"].elements[0].value);
                 numberOfColumns = Number(document.forms["myForm"].elements[1].value);
                 /* allows you to make edits by clearing an rebuilding */
                 while(page1.firstChild){
                     page1.removeChild(page1.firstChild);
                 }
-                var table = document.createElement("table");
                 var content = [];
                 var rowId = "row";
                 /* building var content[a table [a row],[a row]...] */
