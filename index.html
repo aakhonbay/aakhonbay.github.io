@@ -6,27 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        #friends:hover{
+            box-shadow: 5px 10px 18px #888888;
+            background-color: white;
+        }
+        #getup:hover{
+            box-shadow: 5px 10px 18px #888888;
+            background-color: white;
+        }
+    </style>
 </head>
 <body 
         style="border: solid black 2px">
 <div 
         class="header"
-        style="background-color: black;"
-        >
-
+        style="
+            background-color: black;
+            /* position: -webkit-sticky; */
+            /* position: sticky; */
+            /* padding: 20px; */
+            /* top:0; */
+            ">
     <!-- header -->
 
 </div>
 <div 
         class="container"
         style="display:flex;
-        background-color: aqua"
-        >
+        background-color: aqua;
+        ">
     <div 
         class="left"
-        style="background-color: aqua;
-        width: 70%"
+        style="background-color: rgb(235, 243, 243);
+        width: 80%"
         >
+        <!-- left -->
         <div
         style="
             position: relative;
@@ -41,9 +56,9 @@
         <div style="position: relative;
         top:-50px;
         left:30px">
-            <img src="https://media.licdn.com/dms/image/C5103AQGSc3PNtZ9KsA/profile-displayphoto-shrink_200_200/0?e=1567641600&v=beta&t=LnkzrYbIOyt3_GjIoXoEg3OEvINe3RtaLJKpUDCTxu0" alt="" height="100px" width="100px" 
+            <img src="https://media.licdn.com/dms/image/C5103AQGSc3PNtZ9KsA/profile-displayphoto-shrink_200_200/0?e=1567641600&v=beta&t=LnkzrYbIOyt3_GjIoXoEg3OEvINe3RtaLJKpUDCTxu0" alt="" height="200px" width="200px" 
                     style="
-                    border-radius: 60px;
+                    border-radius: 120px;
                     border: solid white 5px;
 
                     ">
@@ -77,37 +92,110 @@
             </p>
         </div>
         <div
+        style="
+            width: 100%;
+            text-align: center;
+            /* display: none; */
+            margin-bottom: 40px;
+            /* border: solid black 1px; */
+            font-size: 1.5em;
+            color: rgba(246, 142, 7, 0.829);
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        ">
+            Projects
+        </div>
+        <div
             style="display: flex;
+            /* margin: auto; */
+            text-align: center;
+            /* border: solid black 1px; */
+            padding-bottom: 40px;
             ">
-            <div>
-                <!-- Friends -->
+
+            <div
+                id="friends"
+                style="
+                    width: 20%;
+                    /* border: solid black 1px; */
+                    margin-left: auto;
+                    margin-right: 20px;
+                    padding: 20px;
+                ">
+                <a href="https://github.com/aakhonbay/Python" target="_blank">Friends</a>
+                <p 
+                    style="text-align: justify;
+                    ">
+                    Friends is a project that authenticates users, allows them to create groups, and add members to groups.
+                    <hr>
+                    <span>
+                        Python, Django, MySQL
+                    </span>
+                </p>
             </div>
-            <div>
-                <!-- Getup -->
+            <div
+                id="getup"
+                style="
+                    width: 20%;
+                    /* border: solid black 1px; */
+                    margin-right: auto;
+                    margin-left: 20px;
+                    padding: 20px;
+                    ">
+                <a href="https://github.com/aakhonbay/MEAN" target="_blank">Getup</a>
+                <p 
+                    style="
+                    text-align: left;
+                    ">
+                    This project uses Angular MVC functionality. You will find nested modules, components, routes, and route guards. So far Getup includes a tasks page, login/signup pages, and a groups and events view. This project is still being developed. Once completed, it will allow users to create groups, events in groups, different authorizations for users, a discussion board, and user messaging.
+                    <hr>
+                    <span>
+                    MEAN - Angular 8 - JWT - RxJS - RESTful apis - nested modules - components - routing -
+                    MVC
+                    </span>
+                </p>
             </div>
-            <div>
-                <!-- Something else -->
-            </div>
+            <!-- <div
+                style="
+                width: 20%;
+                border: solid black 1px;
+                margin: auto;
+                ">
+                Something else
+            </div> -->
         </div>
     </div>
     <div 
         class="right"
-        style="background-color:aquamarine;
-        width: 30%;
-        padding-left: 20px;
+        style="background-color:white;
+        width: 20%;
+        /* padding-left: 20px; */
         ">
         <!-- <p>Right side</p> -->
-        <div>
-            <p style="font-family:Arial, Helvetica, sans-serif">GitHub Repos:</p>
-            <a href="https://github.com/aakhonbay/MEAN">
-                <img style="margin-bottom: 20px;" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Meanstack-624x250.jpg" alt="" width=50%>
-            </a>
-            <a href="https://github.com/aakhonbay/Python">
-                <img style="margin-bottom: 20px;background-color: darkblue" src="https://www.python.org/static/img/python-logo@2x.png" alt="" width=50%>
-            </a>
-            <a href="https://github.com/aakhonbay/udemy">
-                <img style="margin-bottom: 20px;" src="https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg" alt="" width=50%>
-            </a>
+        <div
+            style="
+                /* margin-left: 30px; */
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+            ">
+            <div
+                style="
+                    /* border: solid black 1px; */
+                    position:absolute;
+                    left:30%;
+                    margin-left: -50px;
+                ">
+                <p style="font-family:Arial, Helvetica, sans-serif">GitHub Repos:</p>
+                <a href="https://github.com/aakhonbay/MEAN" target="_blank">
+                    <img style="margin-bottom: 20px;" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Meanstack-624x250.jpg" alt="" width=50%>
+                </a>
+                <a href="https://github.com/aakhonbay/Python" target="_blank">
+                    <img style="margin-bottom: 20px;background-color: darkblue" src="https://www.python.org/static/img/python-logo@2x.png" alt="" width=50%>
+                </a>
+                <a href="https://github.com/aakhonbay/udemy" target="_blank">
+                    <img style="margin-bottom: 20px;" src="https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg" alt="" width=50%>
+                </a>
+            </div>
         </div>
         <div>
         </div>
@@ -116,8 +204,8 @@
 
 <div 
         class="footer"
-        style="background-color: black;"
-        >
+        style="background-color: black;
+        ">
     footer
 </div>   
 </body>
